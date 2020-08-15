@@ -1,17 +1,17 @@
-package models;
+package com.revature.models;
 
-public class Employee {
+public class Admin {
 	private String name;
 	private String username;
 	private String password;
-	private Integer employeeID;
+	private Integer adminID;
 	
-	public Employee(String name, String username, String password, Integer id) {
+	public Admin(String name, String username, String password, Integer adminID) {
 		super();
 		this.name = name;
 		this.username = username;
 		this.password = password;
-		this.employeeID = id;
+		this.adminID = adminID;
 	}
 
 	public String getName() {
@@ -38,19 +38,19 @@ public class Employee {
 		this.password = password;
 	}
 
-	public Integer getId() {
-		return employeeID;
+	public Integer getAdminID() {
+		return adminID;
 	}
 
-	public void setId(Integer id) {
-		this.employeeID = id;
+	public void setAdminID(Integer adminID) {
+		this.adminID = adminID;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((employeeID == null) ? 0 : employeeID.hashCode());
+		result = prime * result + ((adminID == null) ? 0 : adminID.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -65,11 +65,11 @@ public class Employee {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Employee other = (Employee) obj;
-		if (employeeID == null) {
-			if (other.employeeID != null)
+		Admin other = (Admin) obj;
+		if (adminID == null) {
+			if (other.adminID != null)
 				return false;
-		} else if (!employeeID.equals(other.employeeID))
+		} else if (!adminID.equals(other.adminID))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -91,7 +91,8 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", username=" + username + ", password=" + password + ", id=" + employeeID + "]";
+		return "Admin [name=" + name + ", username=" + username + ", password=" + password + ", adminID=" + adminID
+				+ "]";
 	}
 	
 	
