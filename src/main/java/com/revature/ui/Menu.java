@@ -1,4 +1,4 @@
-package com.revature.main;
+package com.revature.ui;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -31,9 +31,9 @@ public class Menu {
 	}
 		switch(input) {
 			case 1: // Leads to Login view
-			
+				break;
 			case 2: // Leads to register view
-				
+				break;
 			case 3: 
 				System.out.println("Thank you for using our bank system.");
 				System.exit(0);

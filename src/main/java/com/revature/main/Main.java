@@ -2,6 +2,8 @@ package com.revature.main;
 
 import org.apache.log4j.Logger;
 
+import com.revature.ui.Menu;
+
 public class Main {
 
 	private static Logger log = Logger.getLogger(Main.class);
@@ -10,5 +12,4 @@ public class Main {
 		log.info("The applciation has started");
 		Menu.mainMenu();
 	}
-	
 }

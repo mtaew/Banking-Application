@@ -1,0 +1,3 @@
+2020-08-17 18:05:45 INFO  Main:12 - The applciation has started
+2020-08-17 18:05:58 INFO  Main:12 - The applciation has started
+2020-08-17 18:06:19 INFO  Main:12 - The applciation has started
