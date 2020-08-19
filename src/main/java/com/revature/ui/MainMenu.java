@@ -3,7 +3,7 @@ package com.revature.ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Menu {
+public class MainMenu {
 	public static int input = 0;
 	
 	public static void mainMenu() {

@@ -2,7 +2,7 @@ package com.revature.main;
 
 import org.apache.log4j.Logger;
 
-import com.revature.ui.Menu;
+import com.revature.ui.MainMenu;
 
 public class Main {
 
@@ -10,6 +10,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 		log.info("The applciation has started");
-		Menu.mainMenu();
+		MainMenu.mainMenu();
 	}
 }
