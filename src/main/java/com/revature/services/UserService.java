@@ -15,9 +15,7 @@ public class UserService {
 	
 	public User register(String username, String password, Role role) {
 		User u = new User(0, username, password, role);
-		
 		int new_id = userDao.insert(u);
-		
 		if(new_id == 0) {
 			return null;
 			// Insert failed

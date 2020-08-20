@@ -48,8 +48,8 @@ public class UserDAO implements IUserDAO{
 	@Override
 	public int insert(User u) {
 		try (Connection conn = DBConnector.getConnection()) {
-			String sql = "INSERT INTO project0.users (username, password, role) VALUES (?, ?, ?) RETURNING porject0.users.id";
-			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			String sql = "INSERT INTO project0.users (username, password, role) VALUES (?, ?, ?) RETURNING project0.users.id";
+			PreparedStatement stmt = conn.prepareStatement(sql);
 	
 			stmt.setString(1, u.getUsername()); 
 			stmt.setString(2, u.getPassword());
