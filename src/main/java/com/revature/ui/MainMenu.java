@@ -28,9 +28,12 @@ public class MainMenu {
 		System.out.println("Input must be an integer.");
 		mainMenu();
 	}
+	// nextInt does not consume \n, hence I need to call next line here.
+	scanner.nextLine();
 		switch(input) {
 			case 1:
-					// Leads to login view
+				System.out.println("___________________________________________________________\n");
+				LoginMenu.loginMenu();
 				break;
 			case 2:
 				System.out.println("___________________________________________________________\n");
