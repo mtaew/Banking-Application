@@ -41,9 +41,28 @@ public class UserDAO implements IUserDAO{
 	
 	@Override
 	public User findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		User u = null;
+		try (Connection conn = DBConnector.getConnection()) {
+			String sql = "SELECT * FROM project0.users WHERE project0.users.username = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, username);
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String user = rs.getString("username");
+				String pass = rs.getString("password");
+				Role role = Role.valueOf(rs.getString("role"));
+				u = new User(id, user, pass, role);
+				return u;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("FAILED TO FIND USER");
+			return null;
+		}
+		return u;
+	} 
 
 	@Override
 	public int insert(User u) {
