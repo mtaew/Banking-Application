@@ -20,7 +20,12 @@ public class LoginMenu {
 		password = MainMenu.scanner.nextLine();
 		user = us.login(username, password);
 		if (user != null) {
-			CustomerMenu.customerMenu();
+			if (user.getRole().name() == "Customer") {
+				CustomerMenu.customerMenu(user);
+			}
+			if (user.getRole().name() == "Employee") {
+				EmployeeMenu.employeeMenu(user);
+			}
 		}
 	}
 }

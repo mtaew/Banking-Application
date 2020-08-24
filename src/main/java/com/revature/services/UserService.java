@@ -40,9 +40,7 @@ public class UserService {
 			return null;
 			// Insert failed
 		}
-		
 		u.setId(new_id);
-		
 		return u;
 	}
 }
