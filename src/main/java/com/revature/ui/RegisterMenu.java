@@ -25,13 +25,13 @@ public class RegisterMenu {
 			System.out.println("Username cannot contain any special characters!\n");
 			registerMenu();
 		}
-		
+
 		System.out.print("Password: ");
+		password = MainMenu.scanner.nextLine();
 		if (password.isEmpty() || password.equals(" ")) {
 			System.out.println("Password field cannot be empty or blank!\n");
 			registerMenu();
 		}
-		password = MainMenu.scanner.nextLine();
 		
 		System.out.print("Verify Password: ");
 		vPassword = MainMenu.scanner.nextLine();
