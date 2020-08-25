@@ -27,8 +27,11 @@ public class UserDAO implements IUserDAO{
 				int id = rs.getInt("id");
 				String username = rs.getString("username");
 				String password = rs.getString("password");
+				String fname = rs.getString("firstname");
+				String lname = rs.getString("lastname");
+				String email = rs.getString("email");
 				Role role = Role.valueOf(rs.getString("role"));
-				User u = new User(id, username, password, role);
+				User u = new User(id, username, password, fname, lname, email, role);
 				allUsers.add(u);
 			}	
 		} catch (SQLException e) {
@@ -52,8 +55,11 @@ public class UserDAO implements IUserDAO{
 				int id = rs.getInt("id");
 				String user = rs.getString("username");
 				String pass = rs.getString("password");
+				String fname = rs.getString("firstname");
+				String lname = rs.getString("lastname");
+				String email = rs.getString("email");
 				Role role = Role.valueOf(rs.getString("role"));
-				u = new User(id, user, pass, role);
+				u = new User(id, user, pass, fname, lname, email, role);
 				return u;
 			}
 		} catch (SQLException e) {
@@ -67,12 +73,16 @@ public class UserDAO implements IUserDAO{
 	@Override
 	public int insert(User u) {
 		try (Connection conn = DBConnector.getConnection()) {
-			String sql = "INSERT INTO project0.users (username, password, role) VALUES (?, ?, ?) RETURNING project0.users.id";
+			String sql = "INSERT INTO project0.users (username, password, firstname, lastname, email, role)"
+					+ " VALUES (?, ?, ?, ?, ?, ?) RETURNING project0.users.id";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 	
 			stmt.setString(1, u.getUsername()); 
 			stmt.setString(2, u.getPassword());
-			stmt.setObject(3, u.getRole(), Types.OTHER);
+			stmt.setString(3, u.getFname());
+			stmt.setString(4, u.getLname());
+			stmt.setString(5, u.getEmail());
+			stmt.setObject(6, u.getRole(), Types.OTHER);
 			
 			ResultSet rs;
 			if((rs = stmt.executeQuery()) != null) {

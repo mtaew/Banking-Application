@@ -7,18 +7,48 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
+	private String Fname;
+	private String Lname;
+	private String email;
 	private Role role;
 	
 	public User() {
 		super();
 	}
 
-	public User(int id, String username, String password, Role role) {
+	public User(int id, String username, String password, String fname, String lname, String email, Role role) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		Fname = fname;
+		Lname = lname;
+		this.email = email;
 		this.role = role;
+	}
+
+	public String getFname() {
+		return Fname;
+	}
+
+	public void setFname(String fname) {
+		Fname = fname;
+	}
+
+	public String getLname() {
+		return Lname;
+	}
+
+	public void setLname(String lname) {
+		Lname = lname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getId() {
@@ -55,24 +85,27 @@ public class User {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, password, role, username);
+		return Objects.hash(Fname, Lname, email, id, password, role, username);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!(obj instanceof User)) {
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
 		User other = (User) obj;
-		return id == other.id && Objects.equals(password, other.password) && role == other.role
-				&& Objects.equals(username, other.username);
+		return Objects.equals(Fname, other.Fname) && Objects.equals(Lname, other.Lname)
+				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(password, other.password)
+				&& role == other.role && Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", Fname=" + Fname + ", Lname="
+				+ Lname + ", email=" + email + ", role=" + role + "]";
 	}
+
 }

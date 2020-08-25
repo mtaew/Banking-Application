@@ -8,17 +8,16 @@ import com.revature.models.User;
 import com.revature.services.AccountService;
 import com.revature.services.ApplicationService;
 
-public class EmployeeMenu {
+public class AdminMenu {
 	private static IApplicationDAO appDao = new ApplicationDAO();
 	private static IUserDAO userDao = new UserDAO();
 	private static ApplicationService appServ = new ApplicationService();
 	private static AccountService accServ = new AccountService();
 	private static String strInput;
 	private static User userObj;
-	
-	public static void employeeMenu(User user) {
+	public static void adminMenu(User user) {
 		System.out.println("*****************************");
-		System.out.println("*\tEmployee Menu\t    *");
+		System.out.println("*\tAdmin Menu\t    *");
 		System.out.println("*****************************");
 		System.out.println("Please enter one of the following options using numbers. \n"
 				+ "[1] Accept/Deny applications\n"
@@ -42,7 +41,7 @@ public class EmployeeMenu {
 				strInput = MainMenu.scanner.nextLine();
 				userObj = userDao.findByUsername(strInput);
 				appServ.acceptApps(userObj);
-				employeeMenu(user);
+				adminMenu(user);
 				break;
 				
 			case 2:
@@ -51,24 +50,9 @@ public class EmployeeMenu {
 				strInput = MainMenu.scanner.nextLine();
 				userObj = userDao.findByUsername(strInput);
 				appServ.denyApps(userObj);
-				employeeMenu(user);
+				adminMenu(user);
 				break;
 			}
-			break;
-		case 2:
-			accServ.viewAccInfo();
-			employeeMenu(user);
-			break;
-		case 3:
-			accServ.viewAccBal();
-			employeeMenu(user);
-			break;
-		case 4:
-			accServ.viewPersonalInfo();
-			employeeMenu(user);
-			break;
-		case 5:
-			MainMenu.mainMenu();
 			break;
 		}
 	}

@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.models.Role;
 import com.revature.models.User;
+import com.revature.ui.LoginMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +28,20 @@ public class UserService {
 
 	public User login(String username, String password) {
 		User user = userDao.findByUsername(username);
-		if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-			return user;
+		try {
+			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+				return user;
+			}
+		} catch (NullPointerException e) {
+			System.out.println("Invalid username or password!\n");
+			LoginMenu.loginMenu();
 		}
 		return null;
 	}
 	
-	public User register(String username, String password, Role role) {
-		User u = new User(0, username, password, role);
+	public User register(String username, String password, 
+			String fname, String lname, String email, Role role) {
+		User u = new User(0, username, password, fname, lname, email, role);
 		int new_id = userDao.insert(u);
 		if(new_id == 0) {
 			return null;

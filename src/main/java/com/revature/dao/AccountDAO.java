@@ -94,7 +94,20 @@ public class AccountDAO implements IAccountDAO {
 
 	@Override
 	public boolean update(Account a) {
-		// TODO Auto-generated method stub
+		try (Connection conn = DBConnector.getConnection()) {
+			String sql = "UPDATE project0.accounts SET balance = ?, owner = ? WHERE project0.accounts.id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setDouble(1, a.getBalance());
+			stmt.setInt(2, a.getOwner().getId());
+			stmt.setInt(3, a.getId());
+			
+			if (stmt.executeUpdate() != 0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 

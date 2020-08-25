@@ -34,13 +34,13 @@ public class UserServiceTest {
 	}
 
 	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
-		testInstance = new UserService(mockedDao);
-		tae = new User(1, "tae123", "easy123", Role.Customer);
-		when(mockedDao.findByUsername("tae123")).thenReturn(tae);
-		when(mockedDao.findByUsername(anyString())).thenReturn(null);
-	}
+//	public void setUp() throws Exception {
+//		MockitoAnnotations.initMocks(this);
+//		testInstance = new UserService(mockedDao);
+//		tae = new User(1, "tae123", "easy123", Role.Customer);
+//		when(mockedDao.findByUsername("tae123")).thenReturn(tae);
+//		when(mockedDao.findByUsername(anyString())).thenReturn(null);
+//	}
 
 	@After
 	public void tearDown() throws Exception {
