@@ -1,4 +1,4 @@
-package com.revature.dao;
+ package com.revature.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -113,7 +113,16 @@ public class AccountDAO implements IAccountDAO {
 
 	@Override
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
+		try (Connection conn = DBConnector.getConnection()) {
+			String sql = "DELETE FROM project0.accounts WHERE project0.accounts.id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			if (stmt.executeUpdate() != 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 

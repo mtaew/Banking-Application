@@ -52,6 +52,7 @@ public class AccountService {
 		deposit(to, val);
 		return true;
 	}
+	
 	public void viewAccInfo() {
 		accList = accDao.findAll();
 		int prntID;
@@ -68,8 +69,8 @@ public class AccountService {
 			prntUsername = accList.get(i).getOwner().getUsername();
 			System.out.print(prntUsername + "\n\n");
 		}
-		
 	}
+	
 	public void viewAccBal() {
 		accList = accDao.findAll();
 		String prntUsername;
@@ -87,6 +88,7 @@ public class AccountService {
 			System.out.print(prntBal + "\n\n");
 		}
 	}
+	
 	public void viewPersonalInfo() {
 		int counter = 1;
 		accList = accDao.findAll();
@@ -108,6 +110,42 @@ public class AccountService {
 			System.out.print(" | Email: ");
 			email = accList.get(i).getOwner().getEmail();
 			System.out.print(email + "\n\n");
+			counter++; 
+		}
+	}
+	
+	public void viewCompleteAccountInfo () {
+		int counter = 1;
+		accList = accDao.findAll();
+		String username, fname, lname, email;
+		int userid, accid;
+		double bal;
+		System.out.println("====================\n" 
+				+ "All Accounts\n"
+				+ "===================="
+		);
+		for (int i = 0; i < accList.size(); i++) {
+			System.out.print(counter +". UserID: ");
+			userid = accList.get(i).getOwner().getId();
+			System.out.print(userid);
+			System.out.print(" | AccountID: ");
+			accid = accList.get(i).getId();
+			System.out.print(accid);
+			System.out.print(" | Username: ");
+			username = accList.get(i).getOwner().getUsername();
+			System.out.print(username);
+			System.out.print(" | First Name: ");
+			fname = accList.get(i).getOwner().getFname();
+			System.out.print(fname);
+			System.out.print(" | Last Name: ");
+			lname = accList.get(i).getOwner().getLname();
+			System.out.print(lname);
+			System.out.print(" | Email: ");
+			email = accList.get(i).getOwner().getEmail();
+			System.out.print(email);
+			System.out.print(" | Balance: ");
+			bal = accList.get(i).getBalance();
+			System.out.print(bal + "\n");
 			counter++; 
 		}
 	}

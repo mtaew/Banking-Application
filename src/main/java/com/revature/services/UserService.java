@@ -40,7 +40,7 @@ public class UserService {
 	}
 	
 	public User register(String username, String password, 
-			String fname, String lname, String email, Role role) {
+		String fname, String lname, String email, Role role) {
 		User u = new User(0, username, password, fname, lname, email, role);
 		int new_id = userDao.insert(u);
 		if(new_id == 0) {

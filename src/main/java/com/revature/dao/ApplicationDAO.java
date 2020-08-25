@@ -96,8 +96,18 @@ public class ApplicationDAO implements IApplicationDAO{
 
 	@Override
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
+		try (Connection conn = DBConnector.getConnection()) {
+			String sql = "DELETE FROM project0.applications WHERE project0.applications.id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			if (stmt.executeUpdate() != 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
+
 
 }
