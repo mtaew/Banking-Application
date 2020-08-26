@@ -96,16 +96,4 @@ public class UserDAO implements IUserDAO{
 		}
 		return 0; // Invalid primary key
 	}
-	
-	@Override
-	public boolean update(User u) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete(int userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

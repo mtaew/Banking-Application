@@ -8,7 +8,6 @@ import com.revature.models.User;
 
 public interface IApplicationDAO {
 	public List<Application> findAll();
-	public Application findByOwner(User owner);
 	public int insert(Application a);
 	public boolean update(Application a);
 	public boolean delete(int id);

@@ -7,9 +7,12 @@ import com.revature.dao.AccountDAO;
 import com.revature.dao.ApplicationDAO;
 import com.revature.dao.IAccountDAO;
 import com.revature.dao.IApplicationDAO;
+import com.revature.dao.IUserDAO;
 import com.revature.models.Account;
 import com.revature.models.Application;
 import com.revature.models.User;
+import com.revature.ui.EmployeeMenu;
+import com.revature.ui.MainMenu;
 
 public class ApplicationService {
 	private IApplicationDAO appDao = new ApplicationDAO();
@@ -19,6 +22,11 @@ public class ApplicationService {
 	public ApplicationService() {
 		super();
 		this.appDao = new ApplicationDAO();
+	}
+	
+	public ApplicationService(IApplicationDAO appDao) {
+		super();
+		this.appDao = appDao;
 	}
 	
 	public Application applyForAccount(User u) {
@@ -58,9 +66,7 @@ public class ApplicationService {
 				applicantId = appList.get(i).getOwner().getId();
 			}
 		}
-		//System.out.println("application owner #: " + applicantId);
 		for (int i = 0; i < accList.size(); i++) {
-			//System.out.println("account owner #: " + accList.get(i).getOwner().getId());
 			if (accList.get(i).getOwner().getId() == applicantId) {
 				return true;
 			}
@@ -81,14 +87,20 @@ public class ApplicationService {
 		Application app = new Application(applicantId, user, "accepted");
 		if (appDao.update(app)) {
 			accServ.createAccount(user);
-			System.out.println("Applicant has been accepted!");
+			System.out.println("Applicant has been accepted!\n");
 		} else {
-			System.out.println("Applicant was not accepted!");
+			System.out.println("Applicant was not accepted!\n");
 		}
 	}
 	
 	public void denyApps(User user) {
-		int id = user.getId(); // User id 
+		int id = 0;
+		try {
+			id = user.getId(); // User id 
+		} catch (NullPointerException e) {
+			System.out.println("Not a valid username, please try again!");
+			MainMenu.mainMenu();
+		}
 		int applicantId = 0;
 		List<Application> appList = new ArrayList<>();
 		appList = appDao.findAll();
@@ -99,9 +111,41 @@ public class ApplicationService {
 		}
 		Application app = new Application(applicantId, user, "denied");
 		if (appDao.update(app)) {
-			System.out.println("Applicant has been denied!");
+			System.out.println("Applicant has been denied!\n");
 		} else {
-			System.out.println("Applicant was not denied!");
+			System.out.println("Applicant was not denied!\n");
 		}
 	}
+	
+	public void viewApplications() {
+		String username, appstatus;
+		int appID;
+		List<Application> appList = new ArrayList<>();
+		int counter = 1;
+		appList = appDao.findAll();
+		for (int i = 0; i < appList.size(); i++) {
+			System.out.print(counter +". Application ID: ");
+			appID = appList.get(i).getId();
+			System.out.print(appID);
+			System.out.print(" | Username: ");
+			username = appList.get(i).getOwner().getUsername();
+			System.out.print(username);
+			System.out.print(" | Application Status: ");
+			appstatus = appList.get(i).getAppStatus();
+			System.out.print(appstatus + "\n");
+			counter++;
+		}
+		pressAnyKeyToContinue();
+	}
+	
+	 private void pressAnyKeyToContinue()
+	 { 
+	        System.out.println("Press Enter key to continue...");
+	        try
+	        {
+	            System.in.read();
+	        }  
+	        catch(Exception e)
+	        {}  
+	 }
 }

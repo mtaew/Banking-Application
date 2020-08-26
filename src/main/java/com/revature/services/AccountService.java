@@ -13,6 +13,15 @@ public class AccountService {
 	private IAccountDAO accDao = new AccountDAO();
 	private static List<Account> accList = new ArrayList<>();
 	
+	public AccountService() {
+		super();
+		this.accDao = new AccountDAO();
+	}
+	public AccountService(IAccountDAO accDao) {
+		super();
+		this.accDao = accDao;
+	}
+
 	public Account createAccount(User user) {
 		Account acc = new Account(0, 0, user);
 		int new_id = accDao.insert(acc);
@@ -27,6 +36,10 @@ public class AccountService {
 	public boolean withdrawl(Account acc, double val) {
 		if (acc.getBalance() < 0) {
 			System.out.println("Cannot withdrawl, you have less than $0!");
+			return false;
+		}
+		if ((acc.getBalance() - val) < 0) {
+			System.out.println("Cannot withdrawl, you would have less than $0!");
 			return false;
 		}
 		acc.setBalance(acc.getBalance() - val);
@@ -46,6 +59,7 @@ public class AccountService {
 	
 	public boolean transfer (Account from, Account to, double val) {
 		if (val < 0 || from.getBalance() - val < 0) {
+			System.out.println("Cannot transfer, source account has insufficient funds!");
 			return false;
 		}
 		withdrawl(from, val);
@@ -53,66 +67,16 @@ public class AccountService {
 		return true;
 	}
 	
-	public void viewAccInfo() {
-		accList = accDao.findAll();
-		int prntID;
-		String prntUsername;
-		System.out.println("====================\n" 
-				+ "Account Information\n"
-				+ "===================="
-		);
-		for (int i = 0; i < accList.size(); i++) {
-			System.out.print("ID: ");
-			prntID = accList.get(i).getOwner().getId();
-			System.out.print(prntID);
-			System.out.print(" | Username: ");
-			prntUsername = accList.get(i).getOwner().getUsername();
-			System.out.print(prntUsername + "\n\n");
-		}
-	}
-	
-	public void viewAccBal() {
-		accList = accDao.findAll();
-		String prntUsername;
-		double prntBal;
-		System.out.println("====================\n" 
-				+ "Account Balances\n"
-				+ "===================="
-		);
-		for (int i = 0; i < accList.size(); i++) {
-			System.out.print("Username: ");
-			prntUsername = accList.get(i).getOwner().getUsername();
-			System.out.print(prntUsername);
-			System.out.print(" | Balance: ");
-			prntBal = accList.get(i).getBalance();
-			System.out.print(prntBal + "\n\n");
-		}
-	}
-	
-	public void viewPersonalInfo() {
-		int counter = 1;
-		accList = accDao.findAll();
-		String username, fname, lname, email;
-		System.out.println("====================\n" 
-				+ "Personal Information\n"
-				+ "===================="
-		);
-		for (int i = 0; i < accList.size(); i++) {
-			System.out.print(counter +". Username: ");
-			username = accList.get(i).getOwner().getUsername();
-			System.out.print(username);
-			System.out.print(" | First Name: ");
-			fname = accList.get(i).getOwner().getFname();
-			System.out.print(fname);
-			System.out.print(" | Last Name: ");
-			lname = accList.get(i).getOwner().getLname();
-			System.out.print(lname);
-			System.out.print(" | Email: ");
-			email = accList.get(i).getOwner().getEmail();
-			System.out.print(email + "\n\n");
-			counter++; 
-		}
-	}
+	 private void pressAnyKeyToContinue()
+	 { 
+	        System.out.println("Press Enter key to continue...");
+	        try
+	        {
+	            System.in.read();
+	        }  
+	        catch(Exception e)
+	        {}  
+	 }
 	
 	public void viewCompleteAccountInfo () {
 		int counter = 1;
@@ -120,10 +84,9 @@ public class AccountService {
 		String username, fname, lname, email;
 		int userid, accid;
 		double bal;
-		System.out.println("====================\n" 
-				+ "All Accounts\n"
-				+ "===================="
-		);
+		System.out.println("\t\t\t***************************************");
+		System.out.println("\t\t\t*\tAll Registered Accounts       *");
+		System.out.println("\t\t\t***************************************");
 		for (int i = 0; i < accList.size(); i++) {
 			System.out.print(counter +". UserID: ");
 			userid = accList.get(i).getOwner().getId();
@@ -148,5 +111,6 @@ public class AccountService {
 			System.out.print(bal + "\n");
 			counter++; 
 		}
+		pressAnyKeyToContinue();
 	}
 } 

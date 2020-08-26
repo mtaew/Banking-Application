@@ -8,9 +8,9 @@ public class MainMenu {
 	public static Scanner scanner = new Scanner(System.in);
 	
 	public static void mainMenu() {
-	System.out.println("*************************");
-	System.out.println("*\tMain Menu\t*");
-	System.out.println("*************************");
+	System.out.println("\t\t*************************");
+	System.out.println("\t\t*\tMain Menu\t*");
+	System.out.println("\t\t*************************");
 	
 	System.out.println("Please enter one of the following options using numbers. \n"
 						+ "[1] Login\n"
@@ -32,11 +32,9 @@ public class MainMenu {
 	scanner.nextLine();
 		switch(input) {
 			case 1:
-				System.out.println("___________________________________________________________\n");
 				LoginMenu.loginMenu();
 				break;
 			case 2:
-				System.out.println("___________________________________________________________\n");
 				RegisterMenu.registerMenu();
 				break;
 			case 3: 

@@ -47,11 +47,6 @@ public class ApplicationDAO implements IApplicationDAO{
 	}
 
 	@Override
-	public Application findByOwner(User owner) {
-		return null;
-	}
-
-	@Override
 	public int insert(Application a) {
 		String sql = "INSERT INTO project0.applications (owner) VALUES (?) RETURNING project0.applications.id";
 		

@@ -31,13 +31,7 @@ public class AccountDAO implements IAccountDAO {
 				int id = rs.getInt("id");
 				double balance = rs.getDouble("balance");
 				int ownerId = rs.getInt("owner");
-				
-				// find the User object in allUsers that matches the ownerId;
 				User owner = null;
-				// If there is no owner, then the Account object will have a null value for the owner
-				// Which makes sense
-				// Alternatively, we could perform encapsulation within the Account class if we
-				// anticipate that all accounts should have an owner
 				for(int i = 0; i < allUsers.size(); i++) {
 					if(allUsers.get(i).getId() == ownerId) {
 						owner = allUsers.get(i);
@@ -56,12 +50,6 @@ public class AccountDAO implements IAccountDAO {
 		}
 		
 		return allAccounts;
-	}
-
-	@Override
-	public Account findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

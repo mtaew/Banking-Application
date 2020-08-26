@@ -11,7 +11,6 @@ import com.revature.dao.IUserDAO;
 import com.revature.dao.UserDAO;
 
 public class UserService {
-	
 	private IUserDAO userDao = new UserDAO();
 	
 	// Constructor to be used in normal application
@@ -31,6 +30,10 @@ public class UserService {
 		try {
 			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
 				return user;
+			}
+			else {
+				System.out.println("Invalid username or password!\n");
+				LoginMenu.loginMenu();
 			}
 		} catch (NullPointerException e) {
 			System.out.println("Invalid username or password!\n");

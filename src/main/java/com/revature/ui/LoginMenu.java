@@ -10,9 +10,9 @@ public class LoginMenu {
 	static User user = new User();
 	
 	public static void loginMenu() {
-		System.out.println("**************************");
-		System.out.println("*\tLogin Menu\t *");
-		System.out.println("**************************");
+		System.out.println("\t\t**************************");
+		System.out.println("\t\t*\tLogin Menu\t *");
+		System.out.println("\t\t**************************");
 		System.out.println("To access your account, please enter your username and password below.");
 		System.out.print("Username: ");
 		username = MainMenu.scanner.nextLine();

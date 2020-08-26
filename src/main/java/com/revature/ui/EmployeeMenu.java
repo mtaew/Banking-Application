@@ -17,27 +17,26 @@ public class EmployeeMenu {
 	private static User userObj;
 	
 	public static void employeeMenu(User user) {
-		System.out.println("*****************************");
-		System.out.println("*\tEmployee Menu\t    *");
-		System.out.println("*****************************");
+		System.out.println("\t\t*****************************");
+		System.out.println("\t\t*\tEmployee Menu\t    *");
+		System.out.println("\t\t*****************************");
 		System.out.println("Please enter one of the following options using numbers. \n"
 				+ "[1] Accept/Deny applications\n"
-				+ "[2] View Account Information\n"
-				+ "[3] View Account Balances\n"
-				+ "[4] View Personal Information\n"
-				+ "[5] Main Menu\n");
+				+ "[2] View All Account Information\n"
+				+ "[3] Main Menu\n");
 		System.out.print("Enter here: ");
 		int input = MainMenu.scanner.nextInt();
 		switch (input) {
 		case 1:
-			System.out.println(appDao.findAll());
-			System.out.println("_______________________________");
+			appServ.viewApplications();
 			System.out.println("[1] Accept applications\n"
-					+ "[2] Deny applications");
+					+ "[2] Deny applications\n"
+					+ "[3] Exit\n");
+			System.out.print("Enter here: ");
 			input = MainMenu.scanner.nextInt();
 			switch(input) {
 			case 1:
-				System.out.println("Plese enter the username of applicant you would like to accept: ");
+				System.out.print("Plese enter the username of applicant you would like to accept: ");
 				strInput = MainMenu.scanner.nextLine(); // Calling it twice becuase of nextInt
 				strInput = MainMenu.scanner.nextLine();
 				userObj = userDao.findByUsername(strInput);
@@ -46,28 +45,22 @@ public class EmployeeMenu {
 				break;
 				
 			case 2:
-				System.out.println("Plese enter the username of applicant you would like to deny: ");
+				System.out.print("Plese enter the username of applicant you would like to deny: ");
 				strInput = MainMenu.scanner.nextLine(); // Calling it twice becuase of nextInt
 				strInput = MainMenu.scanner.nextLine();
 				userObj = userDao.findByUsername(strInput);
 				appServ.denyApps(userObj);
 				employeeMenu(user);
 				break;
+			case 3:
+				employeeMenu(user);
 			}
 			break;
 		case 2:
-			accServ.viewAccInfo();
+			accServ.viewCompleteAccountInfo();
 			employeeMenu(user);
 			break;
 		case 3:
-			accServ.viewAccBal();
-			employeeMenu(user);
-			break;
-		case 4:
-			accServ.viewPersonalInfo();
-			employeeMenu(user);
-			break;
-		case 5:
 			MainMenu.mainMenu();
 			break;
 		}
