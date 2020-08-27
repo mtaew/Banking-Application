@@ -2,6 +2,8 @@
 
 CLI banking application for customers and bank employees.
 <br>
+<img src="https://res.cloudinary.com/apideck/image/upload/v1565028276/catalog/cli/icon128x128.png" width="100">
+<br>
 ## Functionalities
 **Customers**
 - Register
@@ -21,9 +23,10 @@ CLI banking application for customers and bank employees.
 - Withdrawl, deposit, transfer from all accounts
 - Cancel accounts
 
-## Technologies used
-|      | Technologies |
+## Technologies Utilized
+|      |                |
 | -------- | -------- |
-| Languages | Java, SQL |
-| APIs | JUnit, Log4J, JDBC  |
+| Languages | Java, SQL (PostgreSQL) |
+| APIs | JUnit, Log4J, JDBC, Mockito |
 | Techniques | TDD, DAO |
+|      |                |
