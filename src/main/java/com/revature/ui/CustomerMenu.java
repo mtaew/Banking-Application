@@ -105,6 +105,7 @@ public class CustomerMenu {
 					}
 				} catch (NullPointerException e) {
 					System.out.println("No such user exists!");
+					accServ.deposit(acc, amountIn);
 					customerMenu(user);
 				}
 				customerMenu(user);

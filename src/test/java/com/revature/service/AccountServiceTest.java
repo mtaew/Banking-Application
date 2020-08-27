@@ -23,9 +23,9 @@ import com.revature.services.AccountService;
 public class AccountServiceTest {
 
 	@Mock
-	List<Account> val = new ArrayList<>();
 	private IAccountDAO mockedDao;
 	private AccountService testInstance = new AccountService(mockedDao);
+	List<Account> val = new ArrayList<>();
 	private User tae;
 	private User customer;
 	private Account acc;
@@ -45,10 +45,12 @@ public class AccountServiceTest {
 		testInstance = new AccountService(mockedDao);
 		tae = new User(1, "Admin", "pass", "Tae", "Myles", "taeMail@gmail.com", Role.Admin);
 		customer = new User(2, "customer", "pass", "cus", "man", "cusMan@gmail.com", Role.Customer);
-		acc = new Account(1, 500, tae);
+		acc = new Account(1, 200, tae);
 		cusAcc = new Account(2, 250, customer);
-		when(mockedDao.insert(acc)).thenReturn(1);
-		when(mockedDao.findAll()).thenReturn(val);
+		List<Account> accList = new ArrayList<>();
+		accList.add(acc);
+		
+		when(mockedDao.update(acc)).thenReturn(true);
 	}
 
 	@After
@@ -72,17 +74,17 @@ public class AccountServiceTest {
 	
 	@Test
 	public void withdrawlFailure() {
-		assertNotEquals(false, testInstance.withdrawl(acc, 501.0));
+		assertEquals(false, testInstance.withdrawl(acc, 501.0));
 	}
 	
 	@Test
 	public void depositSuccessful() {
-		assertEquals(true, testInstance.withdrawl(acc, 200));
+		assertEquals(true, testInstance.deposit(acc, 200));
 	}
 	
 	@Test
 	public void depositFailure() {
-		assertNotEquals(false, testInstance.withdrawl(acc, -5));
+		assertEquals(false, testInstance.deposit(acc, -5));
 	}
 	
 	@Test

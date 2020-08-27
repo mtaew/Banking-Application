@@ -27,8 +27,10 @@ public class ApplicationServiceTest {
 	private ApplicationService testInstance = new ApplicationService(mockedDao);
 	private User tae;
 	private User customer;
-	private Application acceptedApp;
-	private Application pendingApp;
+	private Application acceptedApp1;
+	private Application acceptedApp2;
+	private Application pendingApp1;
+	private Application pendingApp2;
 	private List<Application> val = new ArrayList<>();
 	
 	@BeforeClass
@@ -45,9 +47,13 @@ public class ApplicationServiceTest {
 		testInstance = new ApplicationService(mockedDao);
 		tae = new User(1, "Admin", "pass", "Tae", "Myles", "taeMail@gmail.com", Role.Admin);
 		customer = new User(2, "customer", "pass", "cus", "man", "cusMan@gmail.com", Role.Customer);
-		acceptedApp = new Application(1, tae, "accepted");
-		pendingApp = new Application (1, tae, "pending");
-		when(mockedDao.insert(pendingApp)).thenReturn(1);
+		acceptedApp1 = new Application(1, tae, "accepted");
+		acceptedApp2 = new Application (2, customer, "accepted");
+		pendingApp1 = new Application (1, tae, "pending");
+		pendingApp2 = new Application (2, customer, "pending");
+		val.add(acceptedApp1);
+		when(mockedDao.insert(acceptedApp1)).thenReturn(1);
+		when(mockedDao.insert(acceptedApp2)).thenReturn(1);
 		when(mockedDao.findAll()).thenReturn(val);
 	}
 
@@ -57,7 +63,7 @@ public class ApplicationServiceTest {
 
 	@Test
 	public void applyForAccountSuccess() {
-		assertNotEquals(pendingApp, (testInstance.applyForAccount(tae)));
+		assertNotEquals(pendingApp1, testInstance.applyForAccount(tae));
 	}
 	
 	@Test
@@ -67,7 +73,7 @@ public class ApplicationServiceTest {
 	
 	@Test
 	public void checkAppStatusSuccess() {
-		assertEquals(true, !(testInstance.checkAppStatus(tae)));
+		assertNotEquals(true, testInstance.checkAppStatus(tae));
 	}
 	
 	@Test

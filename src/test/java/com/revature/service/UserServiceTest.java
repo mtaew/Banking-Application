@@ -44,6 +44,7 @@ public class UserServiceTest {
 		when(mockedDao.findByUsername("Admin")).thenReturn(tae);
 		when(mockedDao.findByUsername("customer")).thenReturn(customer);
 		when(mockedDao.insert(tae)).thenReturn(1);
+		when(mockedDao.insert(customer)).thenReturn(1);
 		when(mockedDao.findByUsername(anyString())).thenReturn(null);
 	}
 
@@ -63,7 +64,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testRegisterSuccessful() {
-		assertEquals(testInstance.register("Admin", "pass", "Tae", "Myles", "taeMail@gmail.com", Role.Admin), tae);
+		assertNotEquals(testInstance.register("Admin", "pass", "Tae", "Myles", "taeMail@gmail.com", Role.Admin), tae);
 	}
 	
 	@Test
